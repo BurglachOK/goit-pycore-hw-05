@@ -4,7 +4,7 @@ def generator_numbers(text: str):
         try:
             yield float(number)
         except ValueError:
-            pass
+            break
 
 def sum_profit(text: str, generator_numbers):
     total = 0
