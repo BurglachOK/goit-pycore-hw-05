@@ -17,7 +17,7 @@ def caching_fibonacci():
     return fibonacci
 
 # Отримуємо функцію fibonacci
-fib = caching_fibonacci()
+fib = caching_fibonacci() # запам'ятовує кеш
 
 # Використовуємо функцію fibonacci для обчислення чисел Фібоначчі
 print(fib(10))  # Виведе 55
