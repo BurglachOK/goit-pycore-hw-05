@@ -1,13 +1,29 @@
+import sys
+from pathlib import Path
+
 
 def parse_log_line(line: str) -> dict:
-    pass
+    date, time, level = line.split()[:3]
+    message = ' '.join(line.split()[3:])
+    parsed_line = {
+        'date': date,
+        'time': time,
+        'level': level,
+        'message': message
+    }
+    return parsed_line
 
 
 def load_logs(file_path: str) -> list:
-    pass
+    with open(file_path, 'r') as file:
+        for line in file:
+            yield parse_log_line(line)
+
 
 def filter_logs_by_level(logs: list, level: str) -> list:
-    pass
+    for log in logs:
+        if log['level'] == level:
+            yield log
 
 
 def count_logs_by_level(logs: list) -> dict:
@@ -18,9 +34,14 @@ def display_log_counts(counts: dict):
     pass
 
 
+def print_logs(logs: list):
+    for log in logs:
+        print(log)
 
 
+print(print_logs(load_logs(Path('./log.log'))))
 
+# print(parse_log_line('2021-07-01 12:00:00 INFO This is an info message'))
 
 
 
