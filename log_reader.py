@@ -8,19 +8,15 @@ def errors(func):
             return func(*args, **kwargs)
         except ValueError:
             print("Your log file is corrupted")
-            sys.exit()
         except KeyError:
             print("Should not appear (KeyError)")
-            sys.exit()
         except IndexError:
             print("Should not appear (IndexError)")
-            sys.exit()
         except PermissionError:
             print("Please write a real Path")
-            sys.exit()
         except FileNotFoundError:
             print("Please provide a real File")
-            sys.exit()
+        sys.exit()
     return inner
 
 
@@ -67,17 +63,15 @@ def count_logs_by_level(logs: list) -> dict:
 
 @errors
 def display_log_counts(counts: dict):
-    print('Рівень логування | Кількість\n-----------------|----------')
+    print('\nРівень логування | Кількість\n-----------------|----------')
     for level, count in counts.items():
         print(f'{level}'.ljust(17) + f'| {count}')
 
     if len(sys.argv) == 3:
-        filter_logs_by_level(load_logs(Path(sys.argv[1])), sys.argv[2])
-        print(f'Деталі логів для рівня \'{sys.argv[2].upper()}\':')
-    for level in 
-
-
-
+        filtered_logs = filter_logs_by_level(load_logs(Path(sys.argv[1])), sys.argv[2])
+        print(f'\nДеталі логів для рівня \'{sys.argv[2].upper()}\':')
+        for log in filtered_logs:
+            print(log['date'], log['time'], '-', log['message'])
 
 
 try:
